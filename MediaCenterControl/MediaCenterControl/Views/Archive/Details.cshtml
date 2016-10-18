@@ -1,0 +1,65 @@
+﻿@model MediaCenterControl.Models.Damage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalji kvara</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCenter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCenter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+     @Html.ActionLink("Povratak na arhivu", "Index")
+</p>

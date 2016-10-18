@@ -1,0 +1,121 @@
+/*This stylesheet contains some custom class rather than Bootstrap*/
+
+@font-face {
+    font-family: 'Droid Sans';
+    src: url(../fonts/DroidSans.ttf);
+}
+
+.profile {
+    padding: 0 0;
+}
+    .profile p {
+        color: #fff;
+        font-size: 18px;
+        line-height: 35px;
+        margin-top: 10px;
+    }
+
+    .profile a {
+        color: #fff !important;
+    }
+
+body {
+    margin: 0;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    background-color: #203748;
+}
+
+.body-content {
+    margin-top: 80px;
+    font-size: 18px;
+}
+
+    .body-content a {
+        color: #39D084;
+    }
+
+        .body-content a:hover {
+            text-decoration: none;
+            color: #27925c;
+        }
+
+dd, dt {
+    margin-bottom: 20px;
+}
+
+textarea, select, input[type=text] {
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #555;
+}
+
+select {
+    height: 34px;
+}
+
+.text-danger {
+    color: #fc4949;
+    display: block;
+}
+
+.navbar {
+    min-height: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f04949;
+}
+
+    .navbar .navbar-brand {
+        color: #fff;
+        margin-top: 10px;
+    }
+
+    .navbar .nav > li > a {
+        float: none;
+        padding: 10px 20px 10px;
+        margin: 15px 15px 0;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 18px;
+        border-radius: 20px;
+        -webkit-transition: all 0.2s linear;
+        -moz-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+    }
+
+        .navbar .nav > li > a:hover {
+            background-color: #203748;
+        }
+
+     .user {
+        padding: 10px 20px 10px;
+        margin: 15px 15px 0;
+        font-size: 18px;
+    }
+
+.footer {
+    background: #355267;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+    .footer p {
+        margin: 20px 0;
+    }
+
+        .footer p a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            .footer p a:hover {
+                color: #39d084;
+            }

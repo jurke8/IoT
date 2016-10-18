@@ -1,0 +1,87 @@
+﻿@model MediaCenterControl.Models.Damage
+
+@{
+    ViewBag.Title = "Uređivanje kvara";
+}
+
+<h2>Uređivanje kvara</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DateCreated)
+        @Html.HiddenFor(model => model.UserCreated)
+        @Html.HiddenFor(model => model.IsArchived)
+        @Html.HiddenFor(model => model.IsDeleted)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarBrand, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CarBrand, new SelectList(ViewBag.CarBrands), "Odaberi")
+                @Html.ValidationMessageFor(model => model.CarBrand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarModel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CarModel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CarModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control textarea-field" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceCenter, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ServiceCenter, new SelectList(ViewBag.ServiceCenters), "Odaberi")
+                @Html.ValidationMessageFor(model => model.ServiceCenter, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="date-picker" type="text" name="ServiceDate" value="@string.Format("{0:d.M.yyyy.}", Model.ServiceDate)" />
+                @Html.ValidationMessageFor(model => model.ServiceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Spremi" class="btn btn-lg btn-default btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Povratak na listu", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $('#date-picker').datepicker({
+        format: "d.m.yyyy.",
+        weekStart: 1,
+        todayBtn: "linked",
+        language: "hr",
+        orientation: "bottom left",
+        todayHighlight: true
+    });
+</script>
