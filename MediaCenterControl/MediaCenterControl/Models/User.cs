@@ -13,15 +13,18 @@ namespace MediaCenterControl.Models
         [Required(ErrorMessage = "Ovo polje je obvezno.")]
         public string Username { get; set; }
 
+        [NotMapped]
         [Display(Name = "Lozinka")]
         [Required(ErrorMessage = "Ovo polje je obvezno.")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string PasswordView { get; set; }
+
+        public byte[] Password { get; set; }
 
         [NotMapped]
         [Display(Name = "Potvrda lozinke")]
         [Required(ErrorMessage = "Ovo polje je obvezno.")]
-        [Compare("Password", ErrorMessage = "Lozinke se ne podudaraju.")]
+        [Compare("PasswordView", ErrorMessage = "Lozinke se ne podudaraju.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 

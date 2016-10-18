@@ -3,6 +3,8 @@ using MediaCenterControl.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -27,9 +29,7 @@ namespace MediaCenterControl.Controllers
             {
                 using (DamageDBContext db = new DamageDBContext())
                 {
-                    var matchedUser = db.Users
-                        .Where(u => u.Username.ToUpper() == user.Username.ToUpper())
-                        .FirstOrDefault();
+                    var matchedUser = db.Users.Where(u => u.Username.ToUpper() == user.Username.ToUpper()).FirstOrDefault();
 
                     if (matchedUser != null)
                     {
@@ -37,6 +37,10 @@ namespace MediaCenterControl.Controllers
                     }
                     else
                     {
+                        var password = Encoding.ASCII.GetBytes(user.PasswordView);
+                        var sha1 = new SHA1CryptoServiceProvider();
+                        user.Password = sha1.ComputeHash(password);
+
                         db.Users.Add(user);
                         db.SaveChanges();
 
@@ -59,11 +63,11 @@ namespace MediaCenterControl.Controllers
         {
             using (DamageDBContext db = new DamageDBContext())
             {
-                var dbUser = db.Users
-                    .Where(u => u.Username == user.Username && u.Password == user.Password)
-                    .FirstOrDefault();
-
-                if (dbUser != null)
+                var data = Encoding.ASCII.GetBytes(user.PasswordView);
+                var sha1 = new SHA1CryptoServiceProvider();
+                var hashedPasssword = sha1.ComputeHash(data);
+                var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
+                if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
                 {
                     Session["UserId"] = dbUser.Id.ToString();
                     Session["Username"] = dbUser.Username.ToString();
