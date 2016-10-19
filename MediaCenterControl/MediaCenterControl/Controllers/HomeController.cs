@@ -63,6 +63,10 @@ namespace MediaCenterControl.Controllers
         {
             using (DamageDBContext db = new DamageDBContext())
             {
+                if (String.IsNullOrEmpty(user.IpAddress) ||String.IsNullOrEmpty(user.Port))
+                {
+                    return View();
+                }
                 var data = Encoding.ASCII.GetBytes(user.PasswordView);
                 var sha1 = new SHA1CryptoServiceProvider();
                 var hashedPasssword = sha1.ComputeHash(data);
@@ -71,6 +75,8 @@ namespace MediaCenterControl.Controllers
                 {
                     Session["UserId"] = dbUser.Id.ToString();
                     Session["Username"] = dbUser.Username.ToString();
+                    Session["IpAddress"] = user.IpAddress;
+                    Session["Port"] = user.Port;
 
                     return RedirectToAction("Index", "Damages");
                 }

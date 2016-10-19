@@ -27,6 +27,14 @@ namespace MediaCenterControl.Models
         [Compare("PasswordView", ErrorMessage = "Lozinke se ne podudaraju.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Ovo polje je obvezno.")]
+        [Display(Name = "Ip adresa")]
+        public string IpAddress { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Ovo polje je obvezno.")]
+        [Display(Name = "Port")]
+        public string Port { get; set; }
 
         public User()
         {
