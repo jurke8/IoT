@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     @if (Session["UserId"] != null)
                     {
-                        <li>@Html.ActionLink("Daljinsko upravljanje", "Index", "Damages")</li>
+                        <li>@Html.ActionLink("Daljinsko upravljanje", "Index", "RemoteControl")</li>
                         <li>@Html.ActionLink("Status", "Index", "Archive")</li>
                         <li>@Html.ActionLink("Obavijesti", "Index", "Archive")</li>
                         <li>@Html.ActionLink("Odjava", "Logoff", "Home")</li>

@@ -1,20 +1,24 @@
 ﻿using MediaCenterControl.Context;
 using MediaCenterControl.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MediaCenterControl.Controllers
 {
-    public class HomeController : Controller
+    public class RemoteControlController : Controller
     {
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult Up()
+        {
+            var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""Input.Up""}";
+            Helper.InvokeUrl(url);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Register()
@@ -73,23 +77,12 @@ namespace MediaCenterControl.Controllers
                 var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
                 if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
                 {
-                    var result = Helper.Ping(user.IpAddress, user.Port);
+                    Session["UserId"] = dbUser.Id.ToString();
+                    Session["Username"] = dbUser.Username.ToString();
+                    Session["IpAddress"] = user.IpAddress;
+                    Session["Port"] = user.Port;
 
-                    if (result)
-                    {
-                        Session["UserId"] = dbUser.Id.ToString();
-                        Session["Username"] = dbUser.Username.ToString();
-                        Session["IpAddress"] = user.IpAddress;
-                        Session["Port"] = user.Port;
-
-                        return RedirectToAction("Index", "RemoteControl");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Ip adresa ili port su pogrešni");
-                    }
-                    
-                    
+                    return RedirectToAction("Index", "Damages");
                 }
                 else
                 {
