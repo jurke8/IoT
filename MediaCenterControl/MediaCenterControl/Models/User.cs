@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Resources;
 
 namespace MediaCenterControl.Models
 {
@@ -9,31 +10,31 @@ namespace MediaCenterControl.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Display(Name = "Korisničko ime")]
-        [Required(ErrorMessage = "Ovo polje je obvezno.")]
+        [Display(Name = "UserName", ResourceType = typeof(Localization))]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
         public string Username { get; set; }
 
         [NotMapped]
-        [Display(Name = "Lozinka")]
-        [Required(ErrorMessage = "Ovo polje je obvezno.")]
+        [Display(Name = "Password", ResourceType = typeof(Localization))]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
         [DataType(DataType.Password)]
         public string PasswordView { get; set; }
 
         public byte[] Password { get; set; }
 
         [NotMapped]
-        [Display(Name = "Potvrda lozinke")]
-        [Required(ErrorMessage = "Ovo polje je obvezno.")]
-        [Compare("PasswordView", ErrorMessage = "Lozinke se ne podudaraju.")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Localization))]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Compare("PasswordView", ErrorMessageResourceName ="PasswordField", ErrorMessageResourceType = typeof(Localization))]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "Ovo polje je obvezno.")]
-        [Display(Name = "Ip adresa")]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Display(Name = "IpAddress", ResourceType = typeof(Localization))]
         public string IpAddress { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "Ovo polje je obvezno.")]
-        [Display(Name = "Port")]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Display(Name = "Port", ResourceType = typeof(Localization))]
         public string Port { get; set; }
 
         public User()

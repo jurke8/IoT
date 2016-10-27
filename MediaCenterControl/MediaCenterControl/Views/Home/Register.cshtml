@@ -1,11 +1,11 @@
 ﻿@model MediaCenterControl.Models.User
 
 @{
-    ViewBag.Title = "Registracija";
+    ViewBag.Title = Resources.Localization.Registration;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registracija</h2>
+<h2>@Resources.Localization.Registration</h2>
 
 @using (Html.BeginForm())
 {
@@ -46,14 +46,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Spremi" class="btn btn-lg btn-default btn-success" />
+                <input type="submit" value=@Resources.Localization.Registration class="btn btn-lg btn-default btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Povratak", "Index")
+    @Html.ActionLink(Resources.Localization.Return, "Index")
 </div>
 
 @section Scripts {

@@ -1,12 +1,34 @@
 ﻿@model IEnumerable<MediaCenterControl.Models.Damage>
-
 @{
-    ViewBag.Title = "Daljinsko upravljanje";
+    ViewBag.Title = Resources.Localization.RemoteControl;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Daljinsko upravljanje</h2>
-
+<h2>@Resources.Localization.RemoteControl</h2>
 <div>
-    @Html.ActionLink("Gore", "Up")
+        @Html.ActionLink("Up", "Input", new { methodName = "Up" })
+        <br /><br />
+        @Html.ActionLink("Down", "Input", new { methodName = "Down" })
+        <br /><br />
+        @Html.ActionLink("Left", "Input", new { methodName = "Left" })
+        <br /><br />
+        @Html.ActionLink("Right ", "Input", new { methodName = "Right" })
+        <br /><br />
+        @Html.ActionLink("Select ", "Input", new { methodName = "Select" })
+        <br /><br />
+        @Html.ActionLink("Info ", "Input", new { methodName = "Info" })
+        <br /><br />
+        @Html.ActionLink("Home ", "Input", new { methodName = "Home" })
+        <br /><br />
+        @Html.ActionLink("Back ", "Input", new { methodName = "Back" })
+        <br /><br />
+        @Html.ActionLink("ContextMenu ", "Input", new { methodName = "ContextMenu" })
+        <br /><br />
+        @Html.ActionLink("ExecuteAction ", "Input", new { methodName = "ExecuteAction" })
+        <br /><br />
+        @Html.ActionLink("ShowCodec ", "Input", new { methodName = "ShowCodec" })
+        <br /><br />
+        @Html.ActionLink("ShowOSD ", "Input", new { methodName = "ShowOSD" })
+        <br /><br />
+        @Html.ActionLink("Exit ", "Input", new { methodName = "Exit" })
+
 </div>

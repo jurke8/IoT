@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,6 +18,47 @@ namespace MediaCenterControl
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                //Create culture info object 
+                CultureInfo ci = (CultureInfo)this.Session["Culture"];
+
+                //Checking first if there is no value in session 
+                //and set default language 
+                //this can happen for first user's request
+                if (ci == null)
+                {
+                    //Sets default culture to english invariant
+                    string langName = "hr-HR";
+
+                    //Try to get values from Accept lang HTTP header
+                    if (HttpContext.Current.Request.UserLanguages != null && HttpContext.Current.Request.UserLanguages.Length != 0)
+                    {
+                        //Gets accepted list 
+                        langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
+
+                    }
+                    if (langName != "hr-HR")
+                    {
+                        ci = new CultureInfo("hr-HR");
+
+                        this.Session["Culture"] = ci;
+                    }
+                    else
+                    {
+                        ci = new CultureInfo(langName);
+                        this.Session["Culture"] = ci;
+                    }
+                }
+
+                //Finally setting culture for each request
+                Thread.CurrentThread.CurrentUICulture = ci;
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(new CultureInfo("hr").Name);
+
+            }
         }
     }
 }

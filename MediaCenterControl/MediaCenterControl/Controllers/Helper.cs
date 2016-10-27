@@ -20,18 +20,9 @@ namespace MediaCenterControl.Controllers
         {
             HttpWebRequest request;
             WebResponse response;
-
             try
             {
                 request = (HttpWebRequest)WebRequest.Create(url);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            try
-            {
                 response = request.GetResponse();
             }
             catch (Exception)

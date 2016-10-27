@@ -2,6 +2,8 @@
 using MediaCenterControl.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,7 +23,12 @@ namespace MediaCenterControl.Controllers
         {
             return View();
         }
-
+        public ActionResult ChangeLanguage(string language, string returnUrl)
+        {
+            Session["Culture"] = new CultureInfo(language);
+            var x = Session["Culture"];
+            return Redirect(returnUrl);
+        }
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -63,7 +70,7 @@ namespace MediaCenterControl.Controllers
         {
             using (DamageDBContext db = new DamageDBContext())
             {
-                if (String.IsNullOrEmpty(user.IpAddress) ||String.IsNullOrEmpty(user.Port))
+                if (String.IsNullOrEmpty(user.IpAddress) || String.IsNullOrEmpty(user.Port))
                 {
                     return View();
                 }
@@ -88,8 +95,8 @@ namespace MediaCenterControl.Controllers
                     {
                         ModelState.AddModelError(string.Empty, "Ip adresa ili port su pogrešni");
                     }
-                    
-                    
+
+
                 }
                 else
                 {

@@ -24,20 +24,20 @@
                 <ul class="nav navbar-nav">
                     @if (Session["UserId"] != null)
                     {
-                        <li>@Html.ActionLink("Daljinsko upravljanje", "Index", "RemoteControl")</li>
-                        <li>@Html.ActionLink("Status", "Index", "Archive")</li>
-                        <li>@Html.ActionLink("Obavijesti", "Index", "Archive")</li>
-                        <li>@Html.ActionLink("Odjava", "Logoff", "Home")</li>
+                        <li>@Html.ActionLink(Resources.Localization.RemoteControl, "Index", "RemoteControl")</li>
+                        <li>@Html.ActionLink(Resources.Localization.Language_label, "ChangeLanguage", "Home", new { language = Resources.Localization.Language_short, returnUrl = this.Request.RawUrl }, null)</li>
+                        <li>@Html.ActionLink(Resources.Localization.Logoff, "Logoff", "Home")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Registracija", "Register", "Home")</li>
-                        <li>@Html.ActionLink("Prijava", "Login", "Home")</li>
+                        <li>@Html.ActionLink(Resources.Localization.Registration, "Register", "Home")</li>
+                        <li>@Html.ActionLink(Resources.Localization.Login, "Login", "Home")</li>
+                        <li>@Html.ActionLink(Resources.Localization.Language_label, "ChangeLanguage", "Home", new { language = Resources.Localization.Language_short, returnUrl = this.Request.RawUrl }, null)</li>
                     }
                 </ul>
                 @if (Session["Username"] != null)
                 {
-                    <span class="pull-right user">KORISNIK: @Session["Username"].ToString()</span>
+                    <span class="pull-right user">@Resources.Localization.User: @Session["Username"].ToString()</span>
                 }
             </div>
         </div>
