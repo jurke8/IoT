@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Resources;
 
 namespace MediaCenterControl.Controllers
 {
@@ -26,21 +27,20 @@ namespace MediaCenterControl.Controllers
         public ActionResult ChangeLanguage(string language, string returnUrl)
         {
             Session["Culture"] = new CultureInfo(language);
-            var x = Session["Culture"];
             return Redirect(returnUrl);
         }
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(RegistrationUser user)
         {
             if (ModelState.IsValid)
             {
-                using (DamageDBContext db = new DamageDBContext())
+                using (ApplicationDBContext db = new ApplicationDBContext())
                 {
                     var matchedUser = db.Users.Where(u => u.Username.ToUpper() == user.Username.ToUpper()).FirstOrDefault();
 
                     if (matchedUser != null)
                     {
-                        ModelState.AddModelError(string.Empty, "Korisnik \"" + user.Username + "\" već postoji.");
+                        ModelState.AddModelError(string.Empty, String.Format(Localization.RegistrationError, user.Username));
                     }
                     else
                     {
@@ -52,7 +52,7 @@ namespace MediaCenterControl.Controllers
                         db.SaveChanges();
 
                         ModelState.Clear();
-                        ViewBag.Message = "Račun \"" + user.Username + "\" je uspješno registriran.";
+                        ViewBag.Message = String.Format(Localization.RegistrationMessage, user.Username);
                     }
                 }
             }
@@ -66,41 +66,47 @@ namespace MediaCenterControl.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(LoginUser user)
         {
-            using (DamageDBContext db = new DamageDBContext())
+            if (ModelState.IsValid)
             {
-                if (String.IsNullOrEmpty(user.IpAddress) || String.IsNullOrEmpty(user.Port))
+                using (ApplicationDBContext db = new ApplicationDBContext())
                 {
-                    return View();
-                }
-                var data = Encoding.ASCII.GetBytes(user.PasswordView);
-                var sha1 = new SHA1CryptoServiceProvider();
-                var hashedPasssword = sha1.ComputeHash(data);
-                var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
-                if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
-                {
-                    var result = Helper.Ping(user.IpAddress, user.Port);
-
-                    if (result)
+                    //if (String.IsNullOrEmpty(user.IpAddress) || String.IsNullOrEmpty(user.Port))
+                    //{
+                    //    return View();
+                    //}
+                    //if (String.IsNullOrEmpty(user.PasswordView))
+                    //{
+                    //    ModelState.AddModelError(string.Empty, "";)
+                    //    return View();
+                    //}
+                    var data = Encoding.ASCII.GetBytes(user.PasswordView);
+                    var sha1 = new SHA1CryptoServiceProvider();
+                    var hashedPasssword = sha1.ComputeHash(data);
+                    var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
+                    if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
                     {
-                        Session["UserId"] = dbUser.Id.ToString();
-                        Session["Username"] = dbUser.Username.ToString();
-                        Session["IpAddress"] = user.IpAddress;
-                        Session["Port"] = user.Port;
+                        var result = Helper.Ping(user.IpAddress, user.Port);
 
-                        return RedirectToAction("Index", "RemoteControl");
+                        if (result)
+                        {
+                            Session["UserId"] = dbUser.Id.ToString();
+                            Session["Username"] = dbUser.Username.ToString();
+                            Session["IpAddress"] = user.IpAddress;
+                            Session["Port"] = user.Port;
+
+                            return RedirectToAction("Index", "RemoteControl");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, Localization.LoginError2);
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Ip adresa ili port su pogrešni");
+                        ModelState.AddModelError(string.Empty, Localization.LoginError);
                     }
-
-
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Korisničko ime ili lozinka su pogrešni.");
                 }
             }
             return View();
@@ -109,7 +115,6 @@ namespace MediaCenterControl.Controllers
         public ActionResult Logoff()
         {
             Session.Clear();
-
             return RedirectToAction("Index");
         }
     }

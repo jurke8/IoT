@@ -124,6 +124,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username or password are incorrect.
+        /// </summary>
+        public static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ip address or port are incorrect.
+        /// </summary>
+        public static string LoginError2 {
+            get {
+                return ResourceManager.GetString("LoginError2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log off.
         /// </summary>
         public static string Logoff {
@@ -169,6 +187,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User &quot;{0}&quot; already exists.
+        /// </summary>
+        public static string RegistrationError {
+            get {
+                return ResourceManager.GetString("RegistrationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account &quot;{0}&quot;successfully registered.
+        /// </summary>
+        public static string RegistrationMessage {
+            get {
+                return ResourceManager.GetString("RegistrationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remote control.
         /// </summary>
         public static string RemoteControl {
@@ -205,7 +241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User name.
+        ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string UserName {
             get {

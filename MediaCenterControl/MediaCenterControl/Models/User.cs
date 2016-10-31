@@ -5,6 +5,26 @@ using Resources;
 
 namespace MediaCenterControl.Models
 {
+    public class RegistrationUser : User
+    {
+        [NotMapped]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Localization))]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Compare("PasswordView", ErrorMessageResourceName = "PasswordField", ErrorMessageResourceType = typeof(Localization))]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+    }
+    public class LoginUser : User
+    {
+        [NotMapped]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Display(Name = "IpAddress", ResourceType = typeof(Localization))]
+        public string IpAddress { get; set; }
+        [NotMapped]
+        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
+        [Display(Name = "Port", ResourceType = typeof(Localization))]
+        public string Port { get; set; }
+    }
     public class User
     {
         [Key]
@@ -22,20 +42,6 @@ namespace MediaCenterControl.Models
 
         public byte[] Password { get; set; }
 
-        [NotMapped]
-        [Display(Name = "ConfirmPassword", ResourceType = typeof(Localization))]
-        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
-        [Compare("PasswordView", ErrorMessageResourceName ="PasswordField", ErrorMessageResourceType = typeof(Localization))]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
-        [NotMapped]
-        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
-        [Display(Name = "IpAddress", ResourceType = typeof(Localization))]
-        public string IpAddress { get; set; }
-        [NotMapped]
-        [Required(ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Localization))]
-        [Display(Name = "Port", ResourceType = typeof(Localization))]
-        public string Port { get; set; }
 
         public User()
         {

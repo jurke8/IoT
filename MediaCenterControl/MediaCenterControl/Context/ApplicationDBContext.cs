@@ -7,10 +7,12 @@ using System.Web;
 
 namespace MediaCenterControl.Context
 {
-    public class DamageDBContext : DbContext
+    public class ApplicationDBContext : DbContext
     {
         public DbSet<Damage> Damages { get; set; }
 
         public DbSet<User> Users { get; set; }
+
     }
+
 }

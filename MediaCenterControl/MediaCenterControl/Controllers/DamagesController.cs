@@ -13,7 +13,7 @@ namespace MediaCenterControl.Controllers
 {
     public class DamagesController : Controller
     {
-        private DamageDBContext db = new DamageDBContext();
+        private ApplicationDBContext db = new ApplicationDBContext();
 
         // GET: Damages
         public ActionResult Index()
