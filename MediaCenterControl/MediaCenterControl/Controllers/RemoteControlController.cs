@@ -17,7 +17,7 @@ namespace MediaCenterControl.Controllers
         public ActionResult Input(string methodName)
         {
             var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""Input." + methodName + @"""}";
-            Helper.InvokeUrl(url);
+            ControllerHelper.InvokeUrl(url);
             return RedirectToAction("Index");
         }
     }

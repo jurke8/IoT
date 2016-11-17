@@ -7,14 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
-namespace MediaCenterControl.Controllers
+namespace MediaCenterControl
 {
-    public class Helper
+    public class ControllerHelper
     {
         public static bool Ping(string ip, string port)
         {
             var url = @"http://" + ip + ":" + port + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""JSONRPC.Ping""}";
-            return Helper.InvokeUrl(url);
+            return InvokeUrl(url);
         }
         public static bool InvokeUrl(string url)
         {

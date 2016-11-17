@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display time (s).
+        /// </summary>
+        public static string DisplayTime {
+            get {
+                return ResourceManager.GetString("DisplayTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string HomePage {
@@ -147,6 +156,24 @@ namespace Resources {
         public static string Logoff {
             get {
                 return ResourceManager.GetString("Logoff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
             }
         }
         
@@ -232,6 +259,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to USER.
         /// </summary>
         public static string User {
@@ -246,6 +291,15 @@ namespace Resources {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value out of range.
+        /// </summary>
+        public static string ValueOutOfRange {
+            get {
+                return ResourceManager.GetString("ValueOutOfRange", resourceCulture);
             }
         }
     }

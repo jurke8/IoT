@@ -25,6 +25,7 @@
                     @if (Session["UserId"] != null)
                     {
                         <li>@Html.ActionLink(Resources.Localization.RemoteControl, "Index", "RemoteControl")</li>
+                        <li>@Html.ActionLink(Resources.Localization.Notifications, "Index", "Notifications")</li>
                         <li>@Html.ActionLink(Resources.Localization.Language_label, "ChangeLanguage", "Home", new { language = Resources.Localization.Language_short, returnUrl = this.Request.RawUrl }, null)</li>
                         <li>@Html.ActionLink(Resources.Localization.Logoff, "Logoff", "Home")</li>
                     }

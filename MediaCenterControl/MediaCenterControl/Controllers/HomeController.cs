@@ -87,7 +87,7 @@ namespace MediaCenterControl.Controllers
                     var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
                     if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
                     {
-                        var result = Helper.Ping(user.IpAddress, user.Port);
+                        var result = ControllerHelper.Ping(user.IpAddress, user.Port);
 
                         if (result)
                         {
