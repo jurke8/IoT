@@ -2,32 +2,106 @@
     ViewBag.Title = Resources.Localization.RemoteControl;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@Resources.Localization.RemoteControl</h2>
+@*<h2>@Resources.Localization.RemoteControl</h2>*@
 <div>
-        @Html.ActionLink("Up", "Input", new { methodName = "Up" })
-        <br /><br />
-        @Html.ActionLink("Down", "Input", new { methodName = "Down" })
-        <br /><br />
-        @Html.ActionLink("Left", "Input", new { methodName = "Left" })
-        <br /><br />
-        @Html.ActionLink("Right ", "Input", new { methodName = "Right" })
-        <br /><br />
-        @Html.ActionLink("Select ", "Input", new { methodName = "Select" })
-        <br /><br />
-        @Html.ActionLink("Info ", "Input", new { methodName = "Info" })
-        <br /><br />
-        @Html.ActionLink("Home ", "Input", new { methodName = "Home" })
-        <br /><br />
-        @Html.ActionLink("Back ", "Input", new { methodName = "Back" })
-        <br /><br />
-        @Html.ActionLink("ContextMenu ", "Input", new { methodName = "ContextMenu" })
-        <br /><br />
-        @Html.ActionLink("ExecuteAction ", "Input", new { methodName = "ExecuteAction" })
-        <br /><br />
-        @Html.ActionLink("ShowCodec ", "Input", new { methodName = "ShowCodec" })
-        <br /><br />
-        @Html.ActionLink("ShowOSD ", "Input", new { methodName = "ShowOSD" })
-        <br /><br />
-        @Html.ActionLink("Exit ", "Input", new { methodName = "Exit" })
+    <table class="center">
+        <tr>
+            <td>
+                @Html.ActionLink("ContextMenu", "ExecuteAction", new { actionName = "osd" }, new { @class = "classname list" })
+            </td>
+            <td>
+                @Html.ActionLink("Up", "ExecuteAction", new { actionName = "up" }, new { @class = "classname up" })
+            </td>
+            <td>
+                @Html.ActionLink("Info", "ExecuteAction", new { actionName = "codecinfo" }, new { @class = "classname info" })
+            </td>
+            <td>
+                @Html.ActionLink("Power", "System", new { methodName = "Reboot" }, new { @class = "classname power" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Left", "ExecuteAction", new { actionName = "left" }, new { @class = "classname left" })
+            </td>
+            <td>
+                @Html.ActionLink("Select", "ExecuteAction", new { actionName = "select" }, new { @class = "classname select" })
 
+            </td>
+            <td>
+                @Html.ActionLink("Right ", "ExecuteAction", new { actionName = "right" }, new { @class = "classname right" })
+            </td>
+            <td>
+                @Html.ActionLink("VolumeUp", "ExecuteAction", new { actionName = "volumeup" }, new { @class = "classname volumeup" })
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Back ", "ExecuteAction", new { actionName = "back" }, new { @class = "classname back" })
+
+            </td>
+            <td>
+                @Html.ActionLink("Down", "ExecuteAction", new { actionName = "down" }, new { @class = "classname down" })
+            </td>
+            <td>
+                @Html.ActionLink("Stop", "ExecuteAction", new { actionName = "stop" }, new { @class = "classname stop" })
+            </td>
+            <td>
+                @Html.ActionLink("Mute", "ExecuteAction", new { actionName = "mute" }, new { @class = "classname mute" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Rewind", "ExecuteAction", new { actionName = "rewind" }, new { @class = "classname rewind" })
+            </td>
+            <td>
+                @Html.ActionLink("PlayPause", "ExecuteAction", new { actionName = "playpause" }, new { @class = "classname playpause" })
+
+            </td>
+            <td>
+                @Html.ActionLink("FastForward", "ExecuteAction", new { actionName = "fastforward" }, new { @class = "classname fastforward" })
+            </td>
+            <td>
+                @Html.ActionLink("VolumeDown", "ExecuteAction", new { actionName = "volumedown" }, new { @class = "classname volumedown" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center" id="result">
+                @{Html.RenderPartial("_UpdateLabel");}
+            </td>
+        </tr>
+    </table>
 </div>
+<script>
+    $(".classname").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("href")
+        });
+    });
+    function loadPartialView() {
+        $.ajax({
+      type: 'Post',
+      url: '@Url.Action("UpdateLabel")',
+      dataType: 'HTML',  // add this line
+      success: function (result) {
+             $('#result').html(result);
+      }
+ });
+    }
+
+    $(function() {
+
+        loadPartialView(); // first time
+        // re-call the function each 3seconds
+        window.setInterval("loadPartialView()", 3000);
+
+    });
+</script>
+

@@ -9,6 +9,7 @@ namespace MediaCenterControl.Models
     {
         public int id { get; set; }
         public float jsonrpc { get; set; }
-        public string result { get; set; }
+        public object result { get; set; }
     }
+    
 }

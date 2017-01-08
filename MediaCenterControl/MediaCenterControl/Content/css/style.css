@@ -8,6 +8,7 @@
 .profile {
     padding: 0 0;
 }
+
     .profile p {
         color: #fff;
         font-size: 18px;
@@ -25,7 +26,7 @@ body {
     font-size: 14px;
     line-height: 20px;
     color: #fff;
-    background-color: #203748;
+    background-color: #2c4c63;
 }
 
 .body-content {
@@ -91,14 +92,14 @@ select {
     }
 
         .navbar .nav > li > a:hover {
-            background-color: #203748;
+            background-color: #2c4c63;
         }
 
-     .user {
-        padding: 10px 20px 10px;
-        margin: 15px 15px 0;
-        font-size: 18px;
-    }
+.user {
+    padding: 10px 20px 10px;
+    margin: 15px 15px 0;
+    font-size: 18px;
+}
 
 .footer {
     background: #355267;
@@ -119,3 +120,82 @@ select {
             .footer p a:hover {
                 color: #39d084;
             }
+
+
+a.classname {
+    display: block;
+    width: 70px;
+    height: 70px;
+    text-indent: -9999px; /* hides the link text */
+    background-position: center;
+}
+
+    a.classname.up {
+        background: url(../img/up.svg) no-repeat center;
+    }
+
+    a.classname.down {
+        background: url(../img/down.svg) no-repeat center;
+    }
+
+    a.classname.left {
+        background: url(../img/left.svg) no-repeat center;
+    }
+
+    a.classname.right {
+        background: url(../img/right.svg) no-repeat center;
+    }
+
+    a.classname.select {
+        background: url(../img/select.svg) no-repeat center;
+    }
+
+    a.classname.info {
+        background: url(../img/info.svg) no-repeat center;
+    }
+
+    a.classname.list {
+        background: url(../img/list.svg) no-repeat center;
+    }
+
+    a.classname.back {
+        background: url(../img/back.svg) no-repeat center;
+    }
+    a.classname.home {
+        background: url(../img/home.svg) no-repeat center;
+    }
+    a.classname.cancel-2 {
+        background: url(../img/cancel-2.svg) no-repeat center;
+    }
+    a.classname.volumeup {
+        background: url(../img/volumeup.svg) no-repeat center;
+    }
+    a.classname.volumedown {
+        background: url(../img/volumedown.svg) no-repeat center;
+    }
+    a.classname.mute {
+        background: url(../img/mute.svg) no-repeat center;
+    }
+    a.classname.rewind {
+        background: url(../img/rewind.svg) no-repeat center;
+    }
+    a.classname.playpause {
+        background: url(../img/pp.svg) no-repeat center;
+    }
+    a.classname.stop {
+        background: url(../img/stop.svg) no-repeat center;
+    }
+    a.classname.fastforward {
+        background: url(../img/ff.svg) no-repeat center;
+    }
+    a.classname.power {
+        background: url(../img/power.svg) no-repeat center;
+    }
+
+
+    a.classname:hover {
+        background-size: 70px;
+    }
+.center {
+margin:auto
+}

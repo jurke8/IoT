@@ -10,9 +10,6 @@ namespace MediaCenterControl.Context
     public class ApplicationDBContext : DbContext
     {
         public DbSet<Damage> Damages { get; set; }
-
         public DbSet<User> Users { get; set; }
-
     }
-
 }

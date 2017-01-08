@@ -1,9 +1,5 @@
-﻿using MediaCenterControl.Context;
-using MediaCenterControl.Models;
-using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+﻿using MediaCenterControl.Models;
+using Newtonsoft.Json;
 using System.Web.Mvc;
 
 namespace MediaCenterControl.Controllers
@@ -14,11 +10,38 @@ namespace MediaCenterControl.Controllers
         {
             return View();
         }
-        public ActionResult Input(string methodName)
+        [HttpPost]
+        public ActionResult UpdateLabel()
         {
-            var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""Input." + methodName + @"""}";
+            var label = GetLabel();
+            return PartialView("_UpdateLabel", label);
+        }
+        public void ExecuteAction(string actionName)
+        {
+            var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""Input.ExecuteAction"", ""params"": { ""action"": """ + actionName + @"""}}";
             ControllerHelper.InvokeUrl(url);
-            return RedirectToAction("Index");
+            GetLabel();
+        }
+        public void System(string methodName)
+        {
+            var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""System." + methodName + @"""}";
+            ControllerHelper.InvokeUrl(url);
+            ViewBag.Video = "";
+        }
+        private string GetLabel()
+        {
+            try
+            {
+                var url = @"http://" + Session["IpAddress"] + ":" + Session["Port"] + @"/jsonrpc?request={""jsonrpc"":""2.0"",""id"":""1"",""method"": ""Player.GetItem"", ""params"": { ""playerid"":1}}";
+                var response = (Response)ControllerHelper.InvokeUrl(url);
+                Result result = JsonConvert.DeserializeObject<Result>(response.result.ToString());
+                Item item = JsonConvert.DeserializeObject<Item>(result.item.ToString());
+                return item.label;
+            }
+            catch (System.Exception)
+            {
+                return "";
+            }
         }
     }
 }

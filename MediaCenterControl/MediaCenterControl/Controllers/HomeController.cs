@@ -89,7 +89,7 @@ namespace MediaCenterControl.Controllers
                     {
                         var result = ControllerHelper.Ping(user.IpAddress, user.Port);
 
-                        if (result)
+                        if (result != null)
                         {
                             Session["UserId"] = dbUser.Id.ToString();
                             Session["Username"] = dbUser.Username.ToString();
