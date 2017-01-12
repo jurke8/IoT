@@ -24,15 +24,15 @@ namespace MediaCenterControl
             if (HttpContext.Current.Session != null)
             {
                 //Create culture info object 
-                CultureInfo ci = (CultureInfo)this.Session["Culture"];
+                CultureInfo cultureInfo = (CultureInfo)this.Session["Culture"];
 
                 //Checking first if there is no value in session 
                 //and set default language 
                 //this can happen for first user's request
-                if (ci == null)
+                if (cultureInfo == null)
                 {
                     //Sets default culture to english invariant
-                    string langName = "hr-HR";
+                    string langName = "en-US";
 
                     //Try to get values from Accept lang HTTP header
                     if (HttpContext.Current.Request.UserLanguages != null && HttpContext.Current.Request.UserLanguages.Length != 0)
@@ -41,21 +41,21 @@ namespace MediaCenterControl
                         langName = HttpContext.Current.Request.UserLanguages[0].Substring(0, 2);
 
                     }
-                    if (langName != "hr-HR")
+                    if (langName != "en-US")
                     {
-                        ci = new CultureInfo("hr-HR");
+                        cultureInfo = new CultureInfo("en-US");
 
-                        this.Session["Culture"] = ci;
+                        this.Session["Culture"] = cultureInfo;
                     }
                     else
                     {
-                        ci = new CultureInfo(langName);
-                        this.Session["Culture"] = ci;
+                        cultureInfo = new CultureInfo(langName);
+                        this.Session["Culture"] = cultureInfo;
                     }
                 }
 
                 //Finally setting culture for each request
-                Thread.CurrentThread.CurrentUICulture = ci;
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(new CultureInfo("hr").Name);
 
             }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Resources;
+using System.Net;
 
 namespace MediaCenterControl.Controllers
 {
@@ -44,6 +45,7 @@ namespace MediaCenterControl.Controllers
                     }
                     else
                     {
+                        //paswword hashing
                         var password = Encoding.ASCII.GetBytes(user.PasswordView);
                         var sha1 = new SHA1CryptoServiceProvider();
                         user.Password = sha1.ComputeHash(password);
@@ -72,37 +74,40 @@ namespace MediaCenterControl.Controllers
             {
                 using (ApplicationDBContext db = new ApplicationDBContext())
                 {
-                    //if (String.IsNullOrEmpty(user.IpAddress) || String.IsNullOrEmpty(user.Port))
-                    //{
-                    //    return View();
-                    //}
-                    //if (String.IsNullOrEmpty(user.PasswordView))
-                    //{
-                    //    ModelState.AddModelError(string.Empty, "";)
-                    //    return View();
-                    //}
+                    //Password hashing
                     var data = Encoding.ASCII.GetBytes(user.PasswordView);
                     var sha1 = new SHA1CryptoServiceProvider();
                     var hashedPasssword = sha1.ComputeHash(data);
+                    //Get user with same username
                     var dbUser = db.Users.Where(u => u.Username == user.Username).FirstOrDefault();
+                    //Check if user exist and hashed passwords
                     if (dbUser != null && hashedPasssword.SequenceEqual(dbUser.Password))
                     {
-                        var result = ControllerHelper.Ping(user.IpAddress, user.Port);
+                        var controllerHelper = new ControllerHelper();
+                        //Kodi ping
+                        var result = controllerHelper.Ping(user.IpAddress, user.Port, user.Username, user.PasswordView);
 
-                        if (result != null)
-                        {
-                            Session["UserId"] = dbUser.Id.ToString();
-                            Session["Username"] = dbUser.Username.ToString();
-                            Session["IpAddress"] = user.IpAddress;
-                            Session["Port"] = user.Port;
-
-                            return RedirectToAction("Index", "RemoteControl");
-                        }
-                        else
+                        //No response
+                        if (result == null)
                         {
                             ModelState.AddModelError(string.Empty, Localization.LoginError2);
+                            return View();
                         }
+                        //Unauthorized
+                        if ("Unauthorized".Equals(result.ToString()))
+                        {
+                            ModelState.AddModelError(string.Empty, Localization.LoginError3);
+                            return View();
+                        }
+                        //If everything ok save to session nad redirect
+                        Session["UserId"] = dbUser.Id.ToString();
+                        Session["Username"] = dbUser.Username.ToString();
+                        Session["IpAddress"] = user.IpAddress;
+                        Session["Port"] = user.Port;
+                        Session["Password"] = user.PasswordView;
+                        return RedirectToAction("Index", "RemoteControl");
                     }
+                        //user not exist or passwords does not matching
                     else
                     {
                         ModelState.AddModelError(string.Empty, Localization.LoginError);

@@ -18,5 +18,7 @@ namespace MediaCenterControl.Models
         [Display(Name = "DisplayTime", ResourceType = typeof(Localization))]
         [Range(3,60,ErrorMessageResourceName = "ValueOutOfRange", ErrorMessageResourceType = typeof(Localization))]
         public int? DisplayTime { get; set; }
+        [Display(Name = "Type", ResourceType = typeof(Localization))]
+        public string Type { get; set; }
     }
 }

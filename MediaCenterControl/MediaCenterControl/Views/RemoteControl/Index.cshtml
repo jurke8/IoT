@@ -2,7 +2,6 @@
     ViewBag.Title = Resources.Localization.RemoteControl;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<h2>@Resources.Localization.RemoteControl</h2>*@
 <div>
     <table class="center">
         <tr>
@@ -87,21 +86,22 @@
     });
     function loadPartialView() {
         $.ajax({
-      type: 'Post',
-      url: '@Url.Action("UpdateLabel")',
-      dataType: 'HTML',  // add this line
-      success: function (result) {
-             $('#result').html(result);
-      }
- });
+            type: 'Post',
+            url: '@Url.Action("UpdateLabel")',
+            dataType: 'HTML',  // add this line
+            success: function (result) {
+                $('#result').html(result);
+            }
+        });
     }
 
-    $(function() {
+    $(function () {
 
         loadPartialView(); // first time
         // re-call the function each 3seconds
         window.setInterval("loadPartialView()", 3000);
-
     });
 </script>
+
+
 

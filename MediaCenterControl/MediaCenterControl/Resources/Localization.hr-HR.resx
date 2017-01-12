@@ -123,8 +123,14 @@
   <data name="DisplayTime" xml:space="preserve">
     <value>Vrijeme trajanja (s) </value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Pogreška</value>
+  </data>
   <data name="HomePage" xml:space="preserve">
     <value>Početna</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Informacija</value>
   </data>
   <data name="IpAddress" xml:space="preserve">
     <value>Ip adresa</value>
@@ -146,6 +152,9 @@
   </data>
   <data name="LoginError2" xml:space="preserve">
     <value>Ip adresa ili port su pogrešni</value>
+  </data>
+  <data name="LoginError3" xml:space="preserve">
+    <value>Nemate prava na pristup aplikaciji</value>
   </data>
   <data name="Logoff" xml:space="preserve">
     <value>Odjava</value>
@@ -189,6 +198,9 @@
   <data name="Title" xml:space="preserve">
     <value>Naslov</value>
   </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tip</value>
+  </data>
   <data name="User" xml:space="preserve">
     <value>KORISNIK</value>
   </data>
@@ -197,5 +209,8 @@
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
     <value>Vrijednost izvan raspona</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Upozorenje</value>
   </data>
 </root>
